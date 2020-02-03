@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.2.0-1 (tags/2.2.0u1-7139; 2012-06-02T10:55:19+0000) JAXWS-RI/2.2.6-2 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://prontipagos.ws.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://prontipagos.ws.com">
+
+<xs:element name="balanceService" type="tns:balanceService"/>
+
+<xs:element name="balanceServiceResponse" type="tns:balanceServiceResponse"/>
+
+<xs:element name="checkStatusService" type="tns:checkStatusService"/>
+
+<xs:element name="checkStatusServiceResponse" type="tns:checkStatusServiceResponse"/>
+
+<xs:element name="obtainCatalogProducts" type="tns:obtainCatalogProducts"/>
+
+<xs:element name="obtainCatalogProductsResponse" type="tns:obtainCatalogProductsResponse"/>
+
+<xs:element name="sellService" type="tns:sellService"/>
+
+<xs:element name="sellServiceResponse" type="tns:sellServiceResponse"/>
+
+<xs:complexType name="sellService">
+<xs:sequence>
+<xs:element name="amount" type="xs:double" minOccurs="0"/>
+<xs:element name="reference" type="xs:string" minOccurs="0"/>
+<xs:element name="sku" type="xs:string" minOccurs="0"/>
+<xs:element name="clientReference" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sellServiceResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:transactionResponseDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="transactionResponseDto">
+<xs:sequence>
+<xs:element name="codeDescription" type="xs:string" minOccurs="0"/>
+<xs:element name="codeTransaction" type="xs:string" minOccurs="0"/>
+<xs:element name="dateTransaction" type="xs:string" minOccurs="0"/>
+<xs:element name="folioTransaction" type="xs:string" minOccurs="0"/>
+<xs:element name="statusTransaction" type="xs:string" minOccurs="0"/>
+<xs:element name="transactionId" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="balanceService">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="balanceServiceResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:responseBalanceTO" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="responseBalanceTO">
+<xs:sequence>
+<xs:element name="balances" type="tns:balanceTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="errorResponseTO" type="tns:errorResponseTO" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="balanceTO">
+<xs:sequence>
+<xs:element name="accountId" type="xs:long" minOccurs="0"/>
+<xs:element name="balance" type="xs:decimal" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="errorResponseTO">
+<xs:sequence>
+<xs:element name="errorCode" type="xs:string" minOccurs="0"/>
+<xs:element name="errorDesc" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtainCatalogProducts">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="obtainCatalogProductsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:responseCatalogProductTO" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="responseCatalogProductTO">
+<xs:sequence>
+<xs:element name="errorResponseTO" type="tns:errorResponseTO" minOccurs="0"/>
+<xs:element name="products" type="tns:productWsTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="productWsTO">
+<xs:sequence>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="fixedFee" type="xs:boolean"/>
+<xs:element name="price" type="xs:decimal" minOccurs="0"/>
+<xs:element name="productName" type="xs:string" minOccurs="0"/>
+<xs:element name="referencesProductsList" type="tns:referencesProductsTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="sku" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="referencesProductsTO">
+<xs:complexContent>
+<xs:extension base="tns:dto">
+<xs:sequence>
+<xs:element name="alterUser" type="xs:long" minOccurs="0"/>
+<xs:element name="alteredDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="confirmation" type="xs:long" minOccurs="0"/>
+<xs:element name="createDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="createUser" type="xs:long" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="productId" type="xs:long" minOccurs="0"/>
+<xs:element name="reference" type="xs:string" minOccurs="0"/>
+<xs:element name="regex" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="dto" abstract="true">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="checkStatusService">
+<xs:sequence>
+<xs:element name="transactionId" type="xs:string" minOccurs="0"/>
+<xs:element name="clientReference" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkStatusServiceResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:transactionResponseTO" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="transactionResponseTO">
+<xs:complexContent>
+<xs:extension base="tns:dto">
+<xs:sequence>
+<xs:element name="codeTransaction" type="xs:string" minOccurs="0"/>
+<xs:element name="statusTransaction" type="xs:string" minOccurs="0"/>
+<xs:element name="codeDescription" type="xs:string" minOccurs="0"/>
+<xs:element name="dateTransaction" type="xs:string" minOccurs="0"/>
+<xs:element name="transactionId" type="xs:string" minOccurs="0"/>
+<xs:element name="folioTransaction" type="xs:string" minOccurs="0"/>
+<xs:element name="transactionStatusDescription" type="xs:string" minOccurs="0"/>
+<xs:element name="additionalInfo" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+</xs:schema>
