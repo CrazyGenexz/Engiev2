@@ -44,7 +44,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-    <body onload="inicioJS()">
+    <body onload="inicio()">
 
         <!-- Javascript -->
         <script src="../ENGIE/js/login.js"></script>
@@ -56,6 +56,30 @@
                 <img src="assets/img/logo@2x.png" class="retina" alt="logo">
             </span>
         </div>
+
+        <!-- Cookies -->
+        <div id="cookies" class="col-md-12" style="width:100%; background-color:rgba(0, 131, 155, 0.8); z-index:100; position:fixed; bottom:0; padding: 20px;">
+            <div class="col-md-12">
+                <h3 class="margin-bottom-small" style="color:#fff !important; font-weight: 800;">Aviso uso de Cookies</h3>
+            </div>
+            <div class="col-md-12">
+                <h4 class="margin-bottom-small" style="color:#fff !important; font-weight: 200;">Al continuar navegando en este sitio web, usted acepta el uso de cookies de terceros o tecnologías similares diseñadas para ofrecerle servicios y contenido personalizado, generar estadísticas de visitas al sitio y compartir contenido en redes sociales. Para obtener más información y cambiar la configuración de cookies, haga <a href="https://www.engiemexico.com/filePaginaAdministrableServlet?tipo=footerEnlacesTerminosCondiciones" style="color:#fff; text-decoration: underline;">Clic aquí</a></h4>
+            </div>
+                <div class="col-md-12">
+                    <a href="#" class="btn-alt small margin-null" onclick="myFunction()" style="background:white; border:white; color:#000; border-radius: 20px; margin-left:auto; margin-right:auto; width:10%; text-align:center !important;">Aceptar</a>
+                </div>
+            </div>
+            <div class="submit-area padding-onlytop-sm">
+                
+            </div>
+        </div>
+
+        <script>
+            function myFunction() {
+              document.getElementById("cookies").style.display = "none";
+            }
+        </script>
+         <!-- End Cookies-->
 
         <!--  Main Wrap  -->
         <div id="main-wrap">
@@ -330,7 +354,7 @@
                         </div>
                         <ul class="sitemap">
                             <li><a href="">Estaciones de compresión</a></li>
-                            <li><a href="">Normativa y Marco Legal</a></li>
+                            <li><a href="https://www.engiemexico.com/filePaginaAdministrableServlet?tipo=footerEnlacesTerminosCondiciones">Términos y Condiciones</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
@@ -438,7 +462,6 @@
         <script src="assets/js/owl.carousel.min.js"></script>
         <script src="assets/js/isotope.min.js"></script>
         <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
         <script src="assets/js/smooth.scroll.min.js"></script>
         <script src="assets/js/jquery.appear.js"></script>

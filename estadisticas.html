@@ -7,7 +7,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Engie</title>
 
-    <script src="js/estadisticas.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
 
@@ -35,6 +34,9 @@
 
     <link rel="stylesheet" href="assets/css/modaal.min.css">
 
+    <!-- Toastr for notifications -->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -42,302 +44,413 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body onload="inicio()">
+    <body onload="inicioJS()">
 
-    <!--  loader  -->
-    <div id="myloader">
-        <span class="loader">
-            <img src="assets/img/logo.png" class="normal" alt="logo">
-            <img src="assets/img/logo@2x.png" class="retina" alt="logo">
-        </span>
-    </div>
+        <!-- Javascript -->
+        <script src="../ENGIE/js/login.js"></script>
 
-    <!--  Main Wrap  -->
-    <div id="main-wrap">
-        <!--  Header & Menu  -->
-        <header id="header" class="fixed transparent">
-            <nav class="navbar navbar-default white">
-                <!--  Header Logo  -->
-                <div id="logo">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="assets/img/logo.png" class="normal" alt="logo">
-                        <img src="assets/img/logo@2x.png" class="retina" alt="logo">
-                        <img src="assets/img/logo_white.png" class="normal white-logo" alt="logo">
-                        <img src="assets/img/logo_white@2x.png" class="retina white-logo" alt="logo">
-                    </a>
-                </div>
-                <!--  END Header Logo  -->
-                <!--  Classic menu, responsive menu classic  -->
-                <div id="menu-classic">
-                    <div class="menu-holder">
-                        <ul>
-                            <li class="submenu">
-                                <a href="#modaal" class="inline">Acceso</a>
-                            </li>
-                            <li class="submenu">
-                                <a href="casos.html">Casos de exito</a>
-                            </li>
-                            <li class="submenu">
-                                <a href="proyectos.html">Proyectos</a>
-                            </li>
-                            <li class="submenu">
-                                <a href="contacto.html">Contacto</a>
-                            </li>
-                        </ul>
+        <!--  loader  -->
+        <div id="myloader">
+            <span class="loader">
+                <img src="assets/img/logo.png" class="normal" alt="logo">
+                <img src="assets/img/logo@2x.png" class="retina" alt="logo">
+            </span>
+        </div>
+
+        <!--  Main Wrap  -->
+        <div id="main-wrap">
+            <!--  Header & Menu  -->
+            <header id="header" class="fixed transparent">
+                <nav class="navbar navbar-default white">
+                    <!--  Header Logo  -->
+                    <div id="logo">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="assets/img/logo.png" class="normal" alt="logo">
+                            <img src="assets/img/logo@2x.png" class="retina" alt="logo">
+                            <img src="assets/img/logo_white.png" class="normal white-logo" alt="logo">
+                            <img src="assets/img/logo_white@2x.png" class="retina white-logo" alt="logo">
+                        </a>
                     </div>
-                </div>
-
-                <!--  END Classic menu, responsive menu classic  -->
-                <!--  Button for Responsive Menu Classic  -->
-                <div id="menu-responsive-classic">
-                    <div class="menu-button">
-                        <span class="bar bar-1"></span>
-                        <span class="bar bar-2"></span>
-                        <span class="bar bar-3"></span>
-                    </div>
-                </div>
-
-                <!--  END Button for Responsive Menu Classic  -->
-                <div class="emergencias">
-                    <a class="blue" href="#"><i class="fa fa-phone"></i>   Emergencias: 01 (444) 47.80.547</a>
-                </div>
-            </nav>
-        </header>
-        <!--  END Header & Menu  -->
-        <!--  Page Content, class footer-fixed if footer is fixed  -->
-        <div id="page-content" class="header-static">
-            <!--  Slider  -->
-            <div id="flexslider" class="fullpage-wrap small" style="height:350px !important;">
-                <ul class="slides">
-                    <li style="background-image:url(assets/img/service2.jpg); height:300px !important;">
-                        <div class="text right typed" style="padding-top:10%;">
-                            <h2 class="title white right margin-bottom">Bienvenido</h2>
-                            <h1 id="nombreusuario" class="medium white ">Juan Ortega</h1>
-                        </div>
-                        <div class="gradient dark"></div>
-                    </li>
-                </ul>
-            </div>
-            <!--  END Slider  -->
-
-
-
-            <div id="home-wrap" class="content-section fullpage-wrap row">
-                <div class="col-md-3 text">
-                    <aside class="sidebar">
-                        <div class="widget-wrapper">
-                            <h4 class="blue" style="margin-bottom:30px;">Mis Documentos</h4>
-                            <ul class="recent-posts">
-                                <li id="menuCarpetas">
-                                    <a href="carpeta.html">
-                                        <p>Carpetas</p>
-                                    </a>
+                    <!--  END Header Logo  -->
+                    <!--  Classic menu, responsive menu classic  -->
+                    <div id="menu-classic">
+                        <div class="menu-holder">
+                            <ul>
+                                <li class="submenu">
+                                    <a href="#modaal" class="inline">Acceso</a>
                                 </li>
-                                <li id="menuArchivos">
-                                    <a href="archivos.html">
-                                        <p>Archivos</p>
-                                    </a>
+                                <li class="submenu">
+                                    <a href="casos.html">Casos de exito</a>
                                 </li>
-                                <li id="menuUsuario">
-                                    <a href="administrar.html">
-                                        <p>Administrar Usuarios</p>
-                                    </a>
+                                <li class="submenu">
+                                    <a href="proyectos.html">Proyectos</a>
                                 </li>
-                                <li id="menuEstadisticas">
-                                    <a href="estadisticas.html">
-                                        <p>Estadísticas</p>
-                                    </a>
+                                <li class="submenu">
+                                    <a href="contacto.html">Contacto</a>
                                 </li>
-
                             </ul>
                         </div>
-                    </aside>
+                    </div>
+
+                    <!--  END Classic menu, responsive menu classic  -->
+                    <!--  Button for Responsive Menu Classic  -->
+                    <div id="menu-responsive-classic">
+                        <div class="menu-button">
+                            <span class="bar bar-1"></span>
+                            <span class="bar bar-2"></span>
+                            <span class="bar bar-3"></span>
+                        </div>
+                    </div>
+
+                    <!--  END Button for Responsive Menu Classic  -->
+                    <div class="emergencias">
+                        <a class="blue" href="#"><i class="fa fa-phone"></i>   Emergencias: 01 (444) 47.80.547</a>
+                    </div>
+                </nav>
+            </header>
+            <!--  END Header & Menu  -->
+            <!--  Page Content, class footer-fixed if footer is fixed  -->
+            <div id="page-content" class="header-static">
+                <!--  Slider  -->
+                <div id="flexslider" class="fullpage-wrap small">
+                    <ul class="slides">
+                        <li style="background-image:url(assets/img/service1.jpg)">
+                            <div class="text right typed" style="padding-top:25%;">
+                                <h2 class="title white right margin-bottom">Cambia tu vida</h2>
+                                <h1 class="medium white ">Lideramos la transición</h1><p><span id="typed" class="big white" data-typed-first="energética global" data-typed-second="energética global"></span></p>
+                            </div>
+                            <div class="gradient dark"></div>
+                        </li>
+                    </ul>
                 </div>
-                <!--  END Right Sidebar  -->
-                <div class="col-md-9 padding-leftright-null">
-                    <!--  News Section  -->
-                    <section id="news" class="page">
-                        <div class="news-items equal one-columns">
-                            <div class="single-news one-item horizontal-news">  
-                                    <div class="row no-margin">
-                                        <div class="col-md-12 padding-leftright-null">
-                                            <div class="col-md-4 padding-leftright-null">
-                                                <div class="text padding-md-bottom-null">
-                                                    <i class="icon ion-ios-location-outline service material left"></i>
-                                                    <div class="service-content">
-                                                        <h6 class="heading  margin-bottom-extrasmall">Nombre del cliente</h6>
-                                                        <p class="margin-bottom-null">Carlos Medina</p>
-                                                        <h6 class="heading  margin-bottom-extrasmall">Número del cliente</h6>
-                                                        <p class="margin-bottom-null">12345-79</p>
-                                                    </div>
-                                                </div>
+                <!--  END Slider  -->
+
+
+
+
+                <div id="home-wrap" class="content-section fullpage-wrap">
+
+                    <div class="row margin-leftright-null text-center">
+                        <div class="col-md-12 padding-leftright-null">
+                            <div class="text" style="padding-bottom:0px;">
+                                <h2 class="margin-bottom-null title center grey">Misión</h2>
+                                <div class="padding-onlytop-md">
+                                    <h4 class="grey big margin-bottom-small">
+                                        Somos una comunidad de constructores creativos unidos por el progreso armónico
+                                    </h4>
+                                    <p class="heading center margin-bottom grey">
+                                        Cada uno de nosotros desempeña un papel esencial en la innovación del mañana y la implementación de proyectos con un impacto positivo generalizado. Somos pioneros, trabajamos unidos y buscamos ir más allá de ofrecer soluciones de energía para resolver requerimientos complejos para hogares, comercios, industrias, ciudades, territorios, y gobiernos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Services -->
+                    <div class="row margin-leftright-null text-center">
+                        <div class="col-md-12 padding-leftright-null">
+                            <div class="text">
+                                <h2 class="margin-bottom-null title center grey">Valores</h2>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col-md-12 padding-leftright-null">
+                            <div class="row no-margin">
+                                <div class="col-md-6 padding-leftright-null">
+                                    <div class="text padding-md-bottom-null">
+                                        <i class="icon ion-ios-pulse service material left"></i>
+                                        <div class="service-content">
+                                            <h6 class="heading  margin-bottom-extrasmall">SOMOS AUDACES</h6>
+                                            <p class="blue">¡Nos atrevemos a intentarlo!</p>
+                                            <p class="margin-bottom-null">
+                                                Enfocados en prepararnos para el futuro, siempre miramos al mundo desde una perspectiva fresca, y nos esforzamos por identificar oportunidades de desarrollo para nuestras empresas. Respaldados por una comunidad con un enorme potencial, creemos que todo es posible y que tenemos los medios necesarios para tener éxito. Nuestra historia y diversidad impulsan nuestro deseo de intentar nuevas cosas, entregar nuevas soluciones, y asumir nuevos desafíos.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 padding-leftright-null">
+                                    <div class="text padding-md-bottom-null">
+                                        <i class="icon ion-ios-pulse service material left"></i>
+                                        <div class="service-content">
+                                            <h6 class="heading  margin-bottom-extrasmall">SOMOS ABIERTOS</h6>
+                                            <p class="blue">¡Trabajamos juntos con fuerza colectiva!</p>
+                                            <p class="margin-bottom-null">
+                                                Con operaciones alrededor del mundo, hemos evolucionado a través de relaciones positivas y un constate contacto con nuestros grupos de interés. Nuestros clientes, proveedores, las autoridades locales, entes reguladores, colegas, y comunidades alimentan nuestra capacidad de anticiparnos a nuevos requerimientos, imaginar nuevas soluciones, diversificar nuestras operaciones e incorporar nuevas habilidades.
+                                                Somos curiosos y optimistas y siempre trabajamos como equipo, combinando nuestro talento dentro y fuera del Grupo.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row no-margin">
+                                <div class="col-md-6 padding-leftright-null">
+                                    <div class="text padding-md-bottom-null">
+                                        <i class="icon ion-ios-pulse service material left"></i>
+                                        <div class="service-content">
+                                            <h6 class="heading  margin-bottom-extrasmall">SOMOS EXIGENTES</h6>
+                                            <p class="blue">¡Nuestros estándares nos hacen únicos!</p>
+                                            <p class="margin-bottom-null">
+                                                Como líderes de la transición energética y los servicios, nuestros objetivos plantean exigentes estándares en nuestros equipos. Nuestro constante esfuerzo y aspiración por el progreso nos impulsa día a día a brindar lo mejor para satisfacer las necesidades de nuestros clientes y socios. Nuestro compromiso colectivo es lo que nos define y nos hace únicos.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 padding-leftright-null">
+                                    <div class="text padding-md-bottom-null">
+                                        <i class="icon ion-ios-pulse service material left"></i>
+                                        <div class="service-content">
+                                            <h6 class="heading  margin-bottom-extrasmall">SOMOS EMPATICOS</h6>
+                                            <p class="blue">¡Construimos un entorno basado en la confianza y la empatía!</p>
+                                            <p class="margin-bottom-null">
+                                                Nuestros resultados son tan importantes como la forma en que los conseguimos. Tener una actitud empática y respetuosa para con nuestros equipos, nuestros interlocutores y nuestro trabajo, es la clave de todo lo que hacemos cada día en ENGIE. Confiamos plenamente en las mujeres y hombres que integran el Grupo y hacemos todo lo posible para que se desarrollen en un entorno de trabajo seguro y saludable.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Services -->
+                    <!-- Services -->
+                    
+                    <!-- Section Image Background -->
+                    <div class="row margin-leftright-null grey-background">
+                        <div class="bg-img overlay transparent responsive" style="background-image:url(assets/img/creative2.jpg)">
+                            <div class="col-md-12 padding-leftright-null">
+                                <div class="text">
+                                    <h2 class="margin-bottom-null title left grey">Nosotros</h2>
+                                    <div class="padding-onlytop-md">
+                                        <h3 class="blue big margin-bottom-small" style="width:50%;">
+                                            Somos una comunidad de constructores creativos unidos por el progreso armónico
+                                        </h3>
+                                        <p class="heading left margin-bottom grey">
+                                            Cada uno de nosotros desempeña un papel esencial en la innovación del mañana y la implementación de proyectos con un impacto positivo generalizado. Somos pioneros, trabajamos unidos y buscamos ir más allá de ofrecer soluciones de energía para resolver requerimientos complejos para hogares, comercios, industrias, ciudades, territorios, y gobiernos.
+                                        </p>
+                                        <a href="#" class="btn-alt active shadow small margin-null">Leer más</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Section Image Background -->
+                    <!--  Projects Showcase  -->
+                    <div id="showcase-projects" class="text white">
+                        <div class="row">
+                            <div class="col-md-12 padding-leftright-null text-center">
+                                <h2 class="margin-bottom-null title grey">Engie</h2>
+                                <div class="padding-md">
+                                    <h3 class="blue big margin-bottom-small center">CASOS DE ÉXITO / PROYECTOS</h3>
+                                    <p class="heading center margin-bottom grey">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, sed amet recusandae natus quo labore asperiores accusamus est cum reprehenderit.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <section class="showcase-carousel">
+                                    <!--  Single Projects  -->
+                                    <div class="item">
+                                        <div class="showcase-project">
+                                            <img src="assets/img/item1.jpg" alt="">
+                                            <div class="content">
+                                                <span class="read">
+                                                    <i class="material-icons">add</i>
+                                                </span>
+                                                <h6 class="heading black">PROYECTO 1</h6>
+                                                <p class="heading margin-null">
+                                                    Estación GNC Umán, Yucatán.
+                                                </p>
                                             </div>
-                                            <div class="col-md-4 padding-leftright-null">
-                                                <div class="text padding-md-bottom-null">
-                                                    <i class="icon ion-ios-telephone-outline service material left"></i>
-                                                    <div class="service-content">
-                                                        <h6 class="heading grey margin-bottom-extrasmall">Fecha de Inicio:</h6>
-                                                        <p class="margin-bottom-null">01/08/2019</p>
-                                                        <h6 class="heading grey margin-bottom-extrasmall">Fecha Final:</h6>
-                                                        <p class="margin-bottom-null">01/08/2019</p>
-                                                    </div>
-                                                </div>
+                                            <a href="#" class="link"></a>
+                                        </div>
+                                    </div>
+                                    <!--  END Single Projects  -->
+                                    <div class="item">
+                                        <div class="showcase-project">
+                                            <img src="assets/img/item2.jpg" alt="">
+                                            <div class="content">
+                                                <span class="read">
+                                                    <i class="material-icons">add</i>
+                                                </span>
+                                                <h6 class="heading black">PROYECTO 2</h6>
+                                                <p class="heading margin-null">
+                                                    Co generación con GNC Umán, Yucatán
+                                                </p>
                                             </div>
-                                            <div class="col-md-4 padding-leftright-null">
-                                                <div class="text">
-                                                    <i class="icon ion-ios-world-outline service material left"></i>
-                                                    <div class="service-content">
-                                                        <h6 class="heading grey margin-bottom-extrasmall">No documento:</h6>
-                                                        <p class="margin-bottom-null">HG-DS-008</p>
-                                                        <h6 class="heading grey margin-bottom-extrasmall">Fecha</h6>
-                                                        <p class="margin-bottom-null">01/08/2019</p>
-                                                        <h6 class="heading grey margin-bottom-extrasmall">Revisión</h6>
-                                                        <p class="margin-bottom-null">1</p>
+                                            <a href="#" class="link"></a>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="showcase-project">
+                                            <img src="assets/img/item3.jpg" alt="">
+                                            <div class="content">
+                                                <span class="read">
+                                                    <i class="material-icons">add</i>
+                                                </span>
+                                                <h6 class="heading black">PROYECTO 3</h6>
+                                                <p class="heading margin-null">
+                                                    Industria aeroespacial Mérida, Yucatán
+                                                </p>
+                                            </div>
+                                            <a href="#" class="link"></a>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="showcase-project">
+                                            <img src="assets/img/item3.jpg" alt="">
+                                            <div class="content">
+                                                <span class="read">
+                                                    <i class="material-icons">add</i>
+                                                </span>
+                                                <h6 class="heading black">PROYECTO 4</h6>
+                                                <p class="heading margin-null">
+                                                    Fabricación de harinas Nixtamalizada
+                                                </p>
+                                            </div>
+                                            <a href="#" class="link"></a>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  END Projects Showcase  -->
+
+
+                </div>
+            </div>
+            <!--  END Page Content, class footer-fixed if footer is fixed  -->
+            <!--  Footer. Class fixed for fixed footer  -->
+            <footer class="">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <h6 class="heading blue margin-bottom-small">Contacto</h6>
+                        <div class="logo2">
+                            <img src="assets/img/icono_mail.PNG" class="normal text-center" alt="logo">
+                            <img src="assets/img/icono_mail.PNG" class="retina text-center" alt="logo">
+                        </div>
+                        <ul class="sitemap">
+                            <li><a href="">Estaciones de compresión</a></li>
+                            <li><a href="">Normativa y Marco Legal</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h6 class="heading blue margin-bottom-small">Carretera Costera del Golfo</h6>
+                        <ul class="sitemap">
+                            <li><a href="">Maz. 34, Lote 13 Col. Gavilán</a></li>
+                            <li><a href="">CP. 96390, Agua Dulce, Veracrúz</a></li>
+                            <li><a href="">Teléfono: 9232320930</a></li>
+                            <li><a href="">Email: contacto@vpm.mx</a></li>
+                        </ul>
+                        <div class="logo2">
+                            <img src="assets/img/icono_location.PNG" class="normal text-center" alt="logo">
+                            <img src="assets/img/icono_location.PNG" class="retina text-center" alt="logo">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h6 class="heading blue margin-bottom-small">Km. 0 Carretera SLP-Guadalajara</h6>
+                        <ul class="sitemap">
+                            <li><a href="">La Pila CP. 78425 </a></li>
+                            <li><a href="">San Luis Potosí, S.L.P. </a></li>
+                            <li><a href="">Teléfono: (444) 4780 610 - 4780 611 </a></li>
+                            <li><a href="">Email: contacto@vpm.mx</a></li>
+                        </ul>
+                        <div class="logo2">
+                            <img src="assets/img/icono_location.PNG" class="normal text-center" alt="logo">
+                            <img src="assets/img/icono_location.PNG" class="retina text-center" alt="logo">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h6 class="heading blue margin-bottom-small">Oficinas Corporativas</h6>
+                        <ul class="sitemap">
+                            <li><a href="">La Pila CP. 78425 </a></li>
+                            <li><a href="">San Luis Potosí, S.L.P. </a></li>
+                            <li><a href="">Teléfono: (444) 4780 610 - 4780 611 </a></li>
+                            <li><a href="">Email: contacto@vpm.mx</a></li>
+                        </ul>
+                        <div class="logo2">
+                            <img src="assets/img/icono_location.PNG" class="normal text-center" alt="logo">
+                            <img src="assets/img/icono_location.PNG" class="retina text-center" alt="logo">
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--  Modal  add modaal.min.css and modaal.min.js -->
+                <div class="row padding-md">
+                    <div class="col-xs-6 col-sm-3">
+                        <div id="modaal">
+                            <div class="row no-margin content-section">
+                                <div class="text">
+                                    <h2 class="margin-bottom-null title left">Iniciar Sesión</h2>
+                                    <div class="row padding-onlytop-md">
+                                        <div class="col-md-6">
+                                            <form id="contact-form" class="padding-md-topbottom-null">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input id="usuario" class="form-field" name="name" id="name" type="text" placeholder="Usuario">
+                                                        <div id="rest-username" style="color: red; font-size: 15px; display: block;">Debes llenar el campo Usuario</div>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div>
+                                                            <input id="contrasena" class="form-field" name="password" id="password" type="password" placeholder="Contraseña">
+                                                            <div id="rest-password" style="color: red; font-size: 15px; display: block;">Es necesario ingresar una contraseña</div>
+                                                        </div>
+                                                        <div class="submit-area padding-onlytop-sm">
+                                                            <button type="button" id="submit-contact" class="btn-alt active shadow" onclick="enviarDatos()">Iniciar Sesión</button>
+                                                            <div id="msg" class="message"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-6 text-center">
+                                            <img src="assets/img/logo.png" style="text-align:center; margin-left:auto; margin-right:auto;" width="50%;">
+                                        </div>
+                                    </div>
+                                        <div class="row padding-onlytop-sm">
+                                            <div class="col-md-6 text-center">
+                                                ¿Olvidaste tu contraseña?
+                                            </div>
+                                            <div class="col-md-6 text-center">
+                                                Solicitar cuenta
                                             </div>
                                         </div>
                                     </div>
-
-                                    <table class="tg" style="text-align: center; margin-left:auto; margin-right:auto; width: 50%;">
-                                        <tr>
-                                          <th class="tg-cly1" colspan="2">Estadística del día de hoy</th>
-                                        </tr>
-                                        <tr>
-                                          <td class="tg-cly1">Total subido</td>
-                                          <td id="totalSubido" class="tg-cly1">1.34</td>
-                                        </tr>
-                                        <tr>
-                                          <td class="tg-cly1">Total descargado</td>
-                                          <td id="totalDescargado" class="tg-cly1">4</td>
-                                        </tr>
-                                        <tr>
-                                          <td class="tg-0lax">Total de archivos</td>
-                                          <td  id="totalArchivos" class="tg-0lax">5</td>
-                                        </tr>
-                                      </table>
-                            
-
                             </div>
                         </div>
-                    </section>
-                    <!--  END News Section  -->
-                        
+                    </div>
                 </div>
+                <!--  END Modal  -->
 
-            </div>
-
-
-
+            </footer>
+            <!--  END Footer. Class fixed for fixed footer  -->
         </div>
-        <!--  END Page Content, class footer-fixed if footer is fixed  -->
-        <!--  Footer. Class fixed for fixed footer  -->
-        <footer class="">
-            <div class="row text-center">
-                <div class="col-md-3">
-                    <h6 class="heading blue margin-bottom-small">Contacto</h6>
-                    <div class="logo2">
-                        <img src="assets/img/icono_mail.PNG" class="normal text-center" alt="logo">
-                        <img src="assets/img/icono_mail.PNG" class="retina text-center" alt="logo">
-                    </div>
-                    <ul class="sitemap">
-                        <li><a href="">Estaciones de compresión</a></li>
-                        <li><a href="">Normativa y Marco Legal</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="heading blue margin-bottom-small">Carretera Costera del Golfo</h6>
-                    <ul class="sitemap">
-                        <li><a href="">Maz. 34, Lote 13 Col. Gavilán</a></li>
-                        <li><a href="">CP. 96390, Agua Dulce, Veracrúz</a></li>
-                        <li><a href="">Teléfono: 9232320930</a></li>
-                        <li><a href="">Email: contacto@vpm.mx</a></li>
-                    </ul>
-                    <div class="logo2">
-                        <img src="assets/img/icono_location.PNG" class="normal text-center" alt="logo">
-                        <img src="assets/img/icono_location.PNG" class="retina text-center" alt="logo">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="heading blue margin-bottom-small">Km. 0 Carretera SLP-Guadalajara</h6>
-                    <ul class="sitemap">
-                        <li><a href="">La Pila CP. 78425 </a></li>
-                        <li><a href="">San Luis Potosí, S.L.P. </a></li>
-                        <li><a href="">Teléfono: (444) 4780 610 - 4780 611 </a></li>
-                        <li><a href="">Email: contacto@vpm.mx</a></li>
-                    </ul>
-                    <div class="logo2">
-                        <img src="assets/img/icono_location.PNG" class="normal text-center" alt="logo">
-                        <img src="assets/img/icono_location.PNG" class="retina text-center" alt="logo">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="heading blue margin-bottom-small">Oficinas Corporativas</h6>
-                    <ul class="sitemap">
-                        <li><a href="">La Pila CP. 78425 </a></li>
-                        <li><a href="">San Luis Potosí, S.L.P. </a></li>
-                        <li><a href="">Teléfono: (444) 4780 610 - 4780 611 </a></li>
-                        <li><a href="">Email: contacto@vpm.mx</a></li>
-                    </ul>
-                    <div class="logo2">
-                        <img src="assets/img/icono_location.PNG" class="normal text-center" alt="logo">
-                        <img src="assets/img/icono_location.PNG" class="retina text-center" alt="logo">
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!--  END Footer. Class fixed for fixed footer  -->
-
-            <!--  Descargar Modal -->
-
-            <div id="modaal_descargar">
-                <div class="row no-margin content-section">
-                    <div class="text">
-                        <h2 class="margin-bottom-null title left">Felicidades</h2>
-                        <div class="row padding-onlytop-md">
-                            <div class="col-md-12">
-                                <form id="contact-form" class="padding-md-topbottom-null">
-                                    <div class="row">
-                                           <p>¡Tu archivo fue descargado exitosamente!</p>
-                                           <input type="submit" id="submit-contact" class="btn-alt active shadow" value="Continuar">
-                                           <div id="msg" class="message"></div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-    <!--  END Modal  -->
-
-                
-                
+        <!--  Main Wrap  -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="assets/js/jquery.min.js"></script>
+        
+        <!-- All js library -->
+        <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.flexslider-min.js"></script>
+        <script src="assets/js/jquery.fullPage.min.js"></script>
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="assets/js/isotope.min.js"></script>
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
+        <script src="assets/js/jquery.scrollTo.min.js"></script>
+        <script src="assets/js/smooth.scroll.min.js"></script>
+        <script src="assets/js/jquery.appear.js"></script>
+        <script src="assets/js/jquery.countTo.js"></script>
+        <script src="assets/js/jquery.scrolly.js"></script>
+        <script src="assets/js/plugins-scroll.js"></script>
+        <script src="assets/js/imagesloaded.min.js"></script>
+        <script src="assets/js/pace.min.js"></script>
+        <script src="assets/js/typed.js"></script>
+        <script src="assets/js/modaal.min.js"></script>
+        <script src="assets/js/main.js"></script>
 
 
-    </div>
-    <!--  Main Wrap  -->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="assets/js/jquery.min.js"></script>
-    <!-- All js library -->
-    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.flexslider-min.js"></script>
-    <script src="assets/js/jquery.fullPage.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/isotope.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-    <script src="assets/js/smooth.scroll.min.js"></script>
-    <script src="assets/js/jquery.appear.js"></script>
-    <script src="assets/js/jquery.countTo.js"></script>
-    <script src="assets/js/jquery.scrolly.js"></script>
-    <script src="assets/js/plugins-scroll.js"></script>
-    <script src="assets/js/imagesloaded.min.js"></script>
-    <script src="assets/js/pace.min.js"></script>
-    <script src="assets/js/typed.js"></script>
-    <script src="assets/js/modaal.min.js"></script>
-    <script src="assets/js/main.js"></script>
-
-</body>
+    </body>
 </html>
