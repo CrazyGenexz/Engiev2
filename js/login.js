@@ -2,7 +2,7 @@ var username="null";
 var password="null";
 var bandera;
 
-function inicioJS(){
+function inicio(){
     document.getElementById("rest-username").style.display='none';
     document.getElementById("rest-password").style.display='none';
 }
@@ -45,9 +45,9 @@ function restricciones(){
            console.log(data);
            if(data.codigo==200){
             console.log(data);
-            var tipoUsuarioL = data.body.TipoUser;
-            var idUsuarioL = data.body.UserId;
-            var nombreL= data.body.Nombre;
+            var idUsuarioL = data.body.UserId;  //Id del usuario en sesión
+            var tipoUsuarioL = data.body.TipoUser; // Tipo de usuario en sesión
+            var nombreL= data.body.Nombre; // Nombre del usuario en sesión
             var objecto = { 'nombre': nombreL , 'tipoUsuario': tipoUsuarioL , 'idUsuario': idUsuarioL };
             localStorage.setItem('datos', JSON.stringify(objecto));
             window.location.replace("carpeta.html");

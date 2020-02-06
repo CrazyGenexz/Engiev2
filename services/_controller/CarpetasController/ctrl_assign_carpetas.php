@@ -7,7 +7,7 @@
             $data = json_decode(file_get_contents('php://input'), true);
             $indices = array(
                 "folderid",
-                "nuevonombre",
+                "userid",//id del usuario al que se le asignará la carpeta
                 "tipouser",
                 "useridupdate"//este es el id de la persona que se encuentra loggeada en el sistema
             );
@@ -28,12 +28,12 @@
                 $conn = sqlsrv_connect( $serverName, $connectionInfo);
                 $fechaActual = date('Y-m-d H:i:s');;
 
-                $nuevonombre=$data['nuevonombre'];
+                $userid=$data['userid'];
                 $folderid=$data['folderid'];
                 $useridupdate=$data['useridupdate'];
         
                 $queryBusqueda = "UPDATE dbo.Folders 
-                SET Ruta = '" . $nuevonombre . "', UpdatedDate = '". $fechaActual . "', UserIdUpdate = '" . $useridupdate . "' 
+                SET UserId = '" . $userid . "', UpdatedDate = '". $fechaActual . "', UserIdUpdate = '" . $useridupdate . "' 
                 WHERE FolderId = '" . $folderid . "';";
 
 

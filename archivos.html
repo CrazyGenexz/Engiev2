@@ -71,17 +71,23 @@
                 <div id="menu-classic">
                     <div class="menu-holder">
                         <ul>
-                            <li class="submenu">
+                            <li id="acceso" class="submenu">
                                 <a href="#modaal" class="inline">Acceso</a>
                             </li>
                             <li class="submenu">
-                                <a href="casos.html">Casos de exito</a>
+                                <a href="carpeta.html">DashBoard</a>
                             </li>
                             <li class="submenu">
-                                <a href="proyectos.html">Proyectos</a>
+                                <a href="index.html">Casos de exito</a>
+                            </li>
+                            <li class="submenu">
+                                <a href="index.html">Proyectos</a>
                             </li>
                             <li class="submenu">
                                 <a href="contacto.html">Contacto</a>
+                            </li>
+                            <li id="cerrarsesion" class="submenu">
+                                <a onclick="cerrarSesion()">Cerrar sesión</a>
                             </li>
                         </ul>
                     </div>
@@ -162,53 +168,48 @@
                                 <div class="row padding-sm2">
                                     <div class="col-md-12 padding-leftright-null" >
                                        
-                                        <div id="subirArchivo">
+                                    
+                                        <form class="form" id="archivoForm" action="archivoUpload.php" method="POST" enctype="multipart/form-data">  
                                             <div class="col-md-12 padding-leftright-null margin-bottom-small">
                                                 <div include="form-input-select()">
-                                                    <select id="selectedCarpetas" required >
+                                                    <select id="selectedCarpetas" onchange="selectArchivos()" required >
                                                       <!--
                                                         This is how we can do "placeholder" options.
                                                         note: "required" attribute is on the select
                                                       -->
                                                       <option value="" id="test">Selecciona tu carpeta</option>
-                                                  
                                                     </select>
                                                 </div>  
                                             </div>
-    
+                                    
+                                        <div id="archivos">
                                             <div class="col-md-12 padding-leftright-null margin-bottom-small">
                                                 <div class="col-md-6">
-    
                                                     <label for="file-upload" class="custom-file-upload" >
-                                                            <i class="fa fa-cloud-upload"></i> Subir Archivo
-                                                        </label>
-                                                        <input id="file-upload" type="file"/>
-    
+                                                        <i class="fa fa-cloud-upload"></i> Seleccionar Archivo
+                                                    </label>
+                                                    <input id="file-upload" type="file" hidden="hidden" name="file-upload" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
                                                 </div>
                                             </div>
+                                            <button type="submit" style="border-radius: 8px;background-color: black;margin: 5px;padding: 5px;color: white;">Subir Archivo</button>
                                         </div>
+                                        
+                                    </form>
     
-                                    <table id="table_id" class="display">
+                                    <table id="table_archivos" class="display">
                                             <thead>
                                                 <tr>
                                                     <th>Fecha</th>
-                                                    <th>Archivos</th>
+                                                    <th>Archivo</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>25-02-2019</td>
-                                                    <td>Excel</td>
-                                                    <td><i class="icon ion-android-download green"><a href="#modaal_descargar" class="inline"> Descargar</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>25-03-2019</td>
-                                                    <td>Excel</td>
-                                                    <td><i class="icon ion-android-download green"></i><a href="#modaal_descargar" class="inline"> Descargar</a></td>
-                                                  </tr>
+                                                
                                             </tbody>
-                                        </table>
+                                    </table>
+
+                                    <a id="borrarmodal" href="#modaal_seguro" class="inline" style="display: none;">Borrar Modal</a>
                                         
                                     </div>
                                 </div>
@@ -305,6 +306,33 @@
 
             <!--  END Modal  -->
 
+            <!-- Eliminar Modal -->
+            <div class="row padding-md">
+                <div clas s="col-xs-6 col-sm-3">
+                    <div id="modaal_seguro">
+                        <div class="row no-margin content-section">
+                            <div class="text">
+                                <h2 class="margin-bottom-null title left">Cuidado</h2>
+                                <div class="row padding-onlytop-md">
+                                    <div class="col-md-12">
+                                        <form id="contact-form" class="padding-md-topbottom-null">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                            <p>Estás a punto de borrar un Archivo. ¿Estás seguro?</p>
+                                                            <button type="button" id="submit-contact" class="btn-alt active shadow" onclick="reload()">Cancelar</button>
+                                                            <button type="button" id="submit-contact" class="btn-alt active shadow" onclick="onClickBorrarArchivo()">Borrar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  END Modal  -->
+
 
 
            
@@ -325,7 +353,6 @@
     <script src="assets/js/owl.carousel.min.js"></script>
     <script src="assets/js/isotope.min.js"></script>
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/smooth.scroll.min.js"></script>
     <script src="assets/js/jquery.appear.js"></script>

@@ -1,0 +1,83 @@
+import React from 'react'
+import './styles/styles.css'
+
+class Statistics extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            numeroDocumento: '',
+            fechaDocumento: '',
+            revision: '',
+            fechaIncial: '',
+            fechaFinal: '',
+            numeroCliente: '',
+            nombreCliente: ''
+        }
+    }
+
+    render(){
+        return(
+    <div className="col-md-6 col-xl-9 mg-b-20 cuadro" >
+        <div className="row border-bottom-1">
+            <div className="col-xl-4 d-xl-flex justify-content-xl-center align-items-xl-center pd-t-10" ><img src="img/engie_logo.png" height="90%" /></div>
+            <div className="col mg-t-30 titulo-gris">
+                <h3 className="d-xl-flex justify-content-xl-start align-items-xl-center">Último Consumo</h3>
+            </div>
+        </div>
+
+        <div className="row border-bottom-1">
+            <div className="col-xl-7 d-xl-flex justify-content-xl-center align-items-xl-center pd-0">
+                <ul className="list-group lista-cuadro">
+                    <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-0 no-border "><span>Nombre del cliente: PLACEHOLDER<br /></span></li>
+                    <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-0 no-border "><span>Número del cliente: PLACEHOLDER<br /></span></li>
+                    <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-0 no-border "><span>Fecha de inicio: 01/12/2019<br /></span></li>
+                    <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-0 no-border "><span>Fecha Final : 31/12/2019<br /></span></li>
+                </ul>
+            </div>
+            <div className="col-xl-5 d-xl-flex justify-content-xl-center align-items-xl-center pd-0">
+                <ul className="list-group d-xl-flex align-items-xl-center lista-cuadro">
+                    <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-1 no-border "><span className="typo-rojo">No. Documento:<br /></span></li>
+                    <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-1 no-border"><span>PLACEHOLDER<br /></span></li>
+                    <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-1 no-border "><span className="typo-rojo">Fecha:</span></li>
+                    <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-1 no-border "><span>21/12/2019<br /></span></li>
+                    <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-1 no-border "><span className="typo-rojo">Revisión:<br /></span></li>
+                    <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-1 no-border "><span>1<br /></span></li>
+                </ul>
+            </div>
+        </div>
+        <div className="row border-bottom-1">
+                    <div className="col-xl-12 d-xl-flex justify-content-xl-center align-items-xl-center pd-0">
+                        <h3><strong>Estadística del día de hoy</strong><br/></h3>
+                    </div>
+                </div>
+                <div className="row estadistica">
+                    <div className="col-xl-4 d-xl-flex justify-content-xl-center align-items-xl-center pd-0">
+                        <ul className="list-group lista-cuadro">
+                            <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-0 no-border "><span>Total subido:</span></li>
+                            <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-0 no-border "><span>Total descargado:<br/></span></li>
+                            <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-0 no-border h-50"><span>Total de archivos:<br/></span></li>
+                        </ul>
+                    </div>
+                    <div className="col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center pd-0">
+                        <ul className="list-group d-xl-flex align-items-xl-center lista-cuadro">
+                            <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-0 no-border h-50"><span>1.34<br/></span></li>
+                            <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-0 no-border h-50"><span>3<br/></span></li>
+                            <li className="list-group-item d-xl-flex align-items-xl-center pd-t-b-0 no-border h-50"><span>5<br/></span></li>
+                        </ul>
+                    </div>
+                    <div className="col-xl-6 d-xl-flex justify-content-xl-center align-items-xl-center pd-0"><img src="img/growth.png" /></div>
+                </div>
+                <div className="row border-bottom-1">
+                    <div className="col d-xl-flex justify-content-xl-center align-items-xl-center">
+                        <div className="btn-group" role="group"><button className="btn btn-primary" type="button">Ver detalles</button><button className="btn btn-primary button_descargar" type="button" >Descargar excel</button></div>
+                    </div>
+                </div>
+            <br/>
+
+    </div>
+        )
+    }
+
+}
+export default Statistics

@@ -6,10 +6,10 @@
         public function __construct() {
             $data = json_decode(file_get_contents('php://input'), true);
             $indices = array(
-                "folderid",
-                "nuevonombre",
+                "nombrearchivo",
+                "userid",
                 "tipouser",
-                "useridupdate"//este es el id de la persona que se encuentra loggeada en el sistema
+                "carpetaid",
             );
             if($this->validaIndices($indices, $data)){
                 echo $this->login($data);
@@ -17,7 +17,7 @@
                 echo "Faltan indices";
             }
         }
-    private function login($data){
+    private function login($data){ 
         $tipouser=$data['tipouser'];
 
         //Si es admin o lider
@@ -28,19 +28,27 @@
                 $conn = sqlsrv_connect( $serverName, $connectionInfo);
                 $fechaActual = date('Y-m-d H:i:s');;
 
-                $nuevonombre=$data['nuevonombre'];
-                $folderid=$data['folderid'];
-                $useridupdate=$data['useridupdate'];
-        
-                $queryBusqueda = "UPDATE dbo.Folders 
-                SET Ruta = '" . $nuevonombre . "', UpdatedDate = '". $fechaActual . "', UserIdUpdate = '" . $useridupdate . "' 
-                WHERE FolderId = '" . $folderid . "';";
+                $nombre=$data['nombrearchivo'];
+                $userid=$data['userid'];
+                $carpetaid=$data['carpetaid'];
 
+                
+
+                //SE ACTUALIZA LA BITACORA CON UN NUEVO REGISTRO
+                $queryUpdate = "INSERT INTO Bitacora (Id_user, Dte, ActType) VALUES ('". $userid ."', '" . $fechaActual . "', 2);";
 
                 $cmd = sqlsrv_query($conn, $queryBusqueda);
+                $cmd2 = sqlsrv_query($conn, $queryUpdate);
 
                 if ($cmd === false) { 
-                    echo "NO se pudo actualizar.\n";  
+                    echo "No se pudo actualizar query 1.\n";  
+                    die(print_r(sqlsrv_errors(), true));
+                
+                } else {  
+                        return $this->response(200);
+                }
+                if ($cmd2 === false) { 
+                    echo "No se pudo actualizar quey 2.\n";  
                     die(print_r(sqlsrv_errors(), true));
                 
                 } else {  
@@ -52,6 +60,7 @@
                 var_dump($ex->getMessage());
             }
         }
+        //Si es cliente u operativo
         else{
             return $this->response(206);
             echo "No tienes permisos suficientes para esta acción";

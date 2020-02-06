@@ -6,9 +6,9 @@
         public function __construct() {
             $data = json_decode(file_get_contents('php://input'), true);
             $indices = array(
-                "nombre",
-                "userid",
-                "tipouser"
+                "folderid",
+                "tipouser",
+                "useridupdate" //id del usuario que borro la carpeta
             );
             if($this->validaIndices($indices, $data)){
                 echo $this->login($data);
@@ -25,16 +25,15 @@
                 $serverName = "localhost"; //serverName\instanceName
                 $connectionInfo = array( "Database"=>"Engie20191124123249_db", "UID"=>"engieAdmin", "PWD"=>"@password123");
                 $conn = sqlsrv_connect( $serverName, $connectionInfo);
-                $fechaActual = date('Y-m-d H:i:s');;
+                $fechaActual = date('Y-m-d H:i:s');
+                $folderid=$data['folderid'];
+                $useridupdate=$data['useridupdate'];
 
-                $queryBusqueda = "DELETE FROM dbo.Folders WHERE Ruta = (?) AND UserId = (?);";
-
-                $nombre=$data['nombre'];
-                $userid=$data['userid'];
-        
+                $queryBusqueda = "UPDATE Folders 
+                SET Status = 0, UserIdUpdate = '".$useridupdate."', UpdatedDate = '".$fechaActual."' 
+                WHERE FolderId = '".$folderid."';";
                 
-                $params=array($nombre,$userid);
-                $cmd = sqlsrv_query($conn, $queryBusqueda, $params);
+                $cmd = sqlsrv_query($conn, $queryBusqueda);
 
                 if ($cmd === false) { 
                     echo "NO se pudo actualizar.\n";  

@@ -9,14 +9,14 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
  
     <!-- Optional theme -->
     <link rel="stylesheet" href="assets/css/bootstrap/bootstrap-theme.min.css">
 
     <!-- Custom css -->
     <link rel="stylesheet" href="assets/css/style.css">
-
+º
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
@@ -74,17 +74,23 @@
                 <div id="menu-classic">
                     <div class="menu-holder">
                         <ul>
-                            <li class="submenu">
+                            <li id="acceso" class="submenu">
                                 <a href="#modaal" class="inline">Acceso</a>
                             </li>
                             <li class="submenu">
-                                <a href="casos.html">Casos de exito</a>
+                                <a href="carpeta.html">DashBoard</a>
                             </li>
                             <li class="submenu">
-                                <a href="proyectos.html">Proyectos</a>
+                                <a href="index.html">Casos de exito</a>
+                            </li>
+                            <li class="submenu">
+                                <a href="index.html">Proyectos</a>
                             </li>
                             <li class="submenu">
                                 <a href="contacto.html">Contacto</a>
+                            </li>
+                            <li id="cerrarsesion" class="submenu">
+                                <a onclick="cerrarSesion()">Cerrar sesión</a>
                             </li>
                         </ul>
                     </div>
@@ -180,7 +186,7 @@
                                         </div>
                                     </div>
                                     
-                                
+                                    
                                     <table class="table-responsive">
                                         <thead>
                                             <tr>
@@ -201,6 +207,11 @@
                                         </tbody>
                                     </table>
 
+                                    
+                                    <div style="display: none;">
+                                        <a id="cambiar_contrasena" href="#modaal_editar" class="inline">Change PW</a>
+                                        <a id="borrar_usuario" href="#modaal_seguro" class="inline">Borrar usuario</a>
+                                    </div>
                                     
 
 
@@ -271,6 +282,7 @@
                     </div>
                 </div>
             </div>
+            
         </footer>
         <!--  END Footer. Class fixed for fixed footer  -->
 
@@ -287,8 +299,8 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                             <p>Estás a punto de borrar una carpeta. ¿Estás seguro?</p>
-                                                            <input type="submit" id="submit-contact" class="btn-alt active shadow" value="Cancelar">
-                                                            <input type="submit" id="submit-contact" class="btn-alt active shadow" value="Borrar">
+                                                            <button type="button" id="submit-contact" class="btn-alt active shadow" onclick="reload()">Cancelar</button>
+                                                            <button type="button" id="submit-contact" class="btn-alt active shadow" onclick="borrarUsuario()">Borrar</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -301,7 +313,7 @@
             </div>
             <!--  END Modal  -->
 
-            <!-- Editar Carpeta Modal -->
+            <!-- Cambiar Contraseña Modal -->
 
             <div id="modaal_editar">
                 <div class="row no-margin content-section">
@@ -314,12 +326,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <input class="form-field" name="name" id="nuevaPass" type="password" placeholder="Nueva contraseña">
+                                            <div id="passwordError" style="color: red;">Ingresa una contraseña</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="submit-area padding-onlytop-sm">
-                                                <input type="submit" id="submit-contact" class="btn-alt active shadow" onclick="cambiarContrasena()" value="Aceptar">
+                                                <button type="button" id="submit-contact" class="btn-alt active shadow" onclick="acceptChange()">Aceptar</button>
                                                 <div id="msg" class="message"></div>
                                             </div>
                                         </div>
@@ -364,7 +377,7 @@
                                             </div>
                                             <div class="col-md-12 padding-md-topbottom-null margin-bottom-small">
                                                 <div include="form-input-select()">
-                                                        <select id="dropdownroles"  required>
+                                                        <select id="dropdownroles" onchange="placeRoleId()" required>
                                                           <!--
                                                             This is how we can do "placeholder" options.
                                                             note: "required" attribute is on the select
@@ -377,7 +390,10 @@
                                                           <option value="3">Corporativo</option>
                                                           <option value="4">Cliente</option>
                                                         </select>
+                                                        
                                                 </div>  
+                                                <div id="errorSelect" style="color: red;">Es necesario seleccionar un rol</div>
+                                                
                                         </div>
                                         </div>
                                         <div class="row">
@@ -411,7 +427,6 @@
     <script src="assets/js/owl.carousel.min.js"></script>
     <script src="assets/js/isotope.min.js"></script>
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/smooth.scroll.min.js"></script>
     <script src="assets/js/jquery.appear.js"></script>

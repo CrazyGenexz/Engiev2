@@ -8,7 +8,8 @@
             $data = json_decode(file_get_contents('php://input'), true);
             $indices = array(
                 "userid",
-                "tipouser");
+                "tipouser",
+                "folderid");
             if($this->validaIndices($indices, $data)){
                 echo $this->login($data);
             }else{
@@ -16,7 +17,6 @@
             }
         }
     private function login($data){ 
-
         try {
             $serverName = "localhost"; //serverName\instanceName
             $connectionInfo = array( "Database"=>"Engie20191124123249_db", "UID"=>"engieAdmin", "PWD"=>"@password123");
@@ -24,16 +24,17 @@
 
             $userid=$data['userid'];
             $usertype=$data['tipouser'];
+            $folderid=$data['folderid'];
 
             if($usertype != 4){
-                $queryBusqueda = "SELECT Folders.FolderId,Folders.Ruta, Folders.UserIdUpdate, Folders.CreatedDate, Folders.UpdatedDate, Users.UserName FROM Folders
-                FULL OUTER JOIN Users ON Folders.UserIdUpdate = Users.UserId  
-                WHERE Status=1;";
-                $cmd = sqlsrv_query($conn, $queryBusqueda);
+                    $queryBusqueda = "SELECT Files.FileId,Files.FileName, Files.UpdatedDate, Users.UserName FROM Files
+                    FULL OUTER JOIN Users ON Files.UserIdUpdate = Users.UserId 
+                    WHERE Status = 1 AND FolderId = '" . $folderid . "';";
+                    $cmd = sqlsrv_query($conn, $queryBusqueda);
             }
             else if($usertype == 4){
-                $queryBusqueda = "SELECT Ruta , FolderId FROM dbo.Folders 
-                WHERE UserId = '". $userid . "' AND Status = 1;";
+                $queryBusqueda = "SELECT FileName, UpdatedDate, FileId FROM Files 
+                WHERE UserId = '". $userid . "' AND Status = 1 AND FolderId = '" . $folderid . "';";
                 $params=array($userid);
                 $cmd = sqlsrv_query($conn, $queryBusqueda, $params);
             }

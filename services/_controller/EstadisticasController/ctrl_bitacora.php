@@ -24,7 +24,7 @@
                 $serverName = "localhost"; //serverName\instanceName
                 $connectionInfo = array( "Database"=>"Engie20191124123249_db", "UID"=>"engieAdmin", "PWD"=>"@password123");
                 $conn = sqlsrv_connect( $serverName, $connectionInfo);
-                $fechaActual = date('Y-m-d');;
+                $fechaActual = date('Y-m-d');
 
                 //Subidas de archivos en total
                 $queryBusqueda1 = "SELECT COUNT(*) FROM dbo.Bitacora WHERE Id_user = (?) and ActType = 1;";

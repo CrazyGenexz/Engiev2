@@ -35,21 +35,18 @@
                 $params=array($userid);
                 $cmd = sqlsrv_query($conn, $queryBusqueda, $params);
                 $rows = sqlsrv_has_rows($cmd);
-                
 
-                if ($cmd) { 
-
-                
-                if( $rows === true){
-    
-                    //return $this->response(200, $tipoUsuario, $idUsuario); 
-                    $response = array('codigo' => 200);
-                    return json_encode($response);
-                    // return $this->response(200, $tipoUsuario, $idUsuario);
-                }
-                else{
-                    echo "No hay datos";
-                }
+                if ($cmd) {
+                    if( $rows === true){
+        
+                        //return $this->response(200, $tipoUsuario, $idUsuario); 
+                        $response = array('codigo' => 200);
+                        return json_encode($response);
+                        // return $this->response(200, $tipoUsuario, $idUsuario);
+                    }
+                    else{
+                        echo "No hay datos";
+                    }
 
                 } else {  
                     echo "Row insertion failed.\n";  

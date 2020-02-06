@@ -80,17 +80,23 @@
                 <div id="menu-classic">
                     <div class="menu-holder">
                         <ul>
-                            <li class="submenu">
+                            <li id="acceso" class="submenu">
                                 <a href="#modaal" class="inline">Acceso</a>
                             </li>
                             <li class="submenu">
-                                <a href="casos.html">Casos de exito</a>
+                                <a href="carpeta.html">DashBoard</a>
                             </li>
                             <li class="submenu">
-                                <a href="proyectos.html">Proyectos</a>
+                                <a href="index.html">Casos de exito</a>
+                            </li>
+                            <li class="submenu">
+                                <a href="index.html">Proyectos</a>
                             </li>
                             <li class="submenu">
                                 <a href="contacto.html">Contacto</a>
+                            </li>
+                            <li id="cerrarsesion" class="submenu">
+                                <a onclick="cerrarSesion()">Cerrar sesión</a>
                             </li>
                         </ul>
                     </div>
@@ -168,23 +174,44 @@
                     <section id="news" class="page">
                         <div class="news-items equal one-columns">
                             <div id="addFolder">
-                            <div class="single-news one-item horizontal-news">
-                                <div class="row padding-sm2">
-                                    <div class="col-md-12 padding-leftright-null">
-                                        <div class="col-md-6">
-                                            <div class="margin-md-bottom">
-                                                <a href="#modaal_folder" class="inline"><i class="icon ion-ios-folder service material left"></i></a>
+                                <div class="single-news one-item horizontal-news">
+                                    <div class="row padding-sm2">
+                                        <div class="col-md-12 padding-leftright-null">
+                                            <div class="col-md-6">
+                                                <div class="margin-md-bottom">
+                                                    <a href="#modaal_folder" class="inline"><i class="icon ion-ios-folder service material left"></i></a>
 
-                                                <div class="service-content">
-                                                    <h6 class="heading margin-bottom-extrasmall"><a href="#modaal_folder" class="inline">Crear Carpeta</a></h6>
-                                                    <p class="margin-bottom-null">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse eveniet dicta minus quaerat dolorem illum.</p>
+                                                    <div class="service-content">
+                                                        <h6 class="heading margin-bottom-extrasmall"><a href="#modaal_folder" class="inline">Crear Carpeta</a></h6>
+                                                        <p class="margin-bottom-null">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse eveniet dicta minus quaerat dolorem illum.</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="assignFolder">
+                                <div class="single-news one-item horizontal-news">
+                                    <div class="row padding-sm2">
+                                        <div class="col-md-12 padding-leftright-null">
+                                            <div class="col-md-6">
+                                                <div class="margin-md-bottom">
+                                                    <a href="#modaal_afolder" class="inline"><i class="icon ion-ios-folder service material left"></i></a>
+
+                                                    <div class="service-content">
+                                                        <h6 class="heading margin-bottom-extrasmall"><a href="#modaal_afolder" class="inline">Asignar Carpeta</a></h6>
+                                                        <p class="margin-bottom-null">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse eveniet dicta minus quaerat dolorem illum.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            
                             
                             
                             <div class="single-news one-item horizontal-news">
@@ -214,13 +241,15 @@
                                     
                                 </table>
 
-                                
-
+                                <a id="editarmodal" href="#modaal_editar" class="inline" style="display: none;">Editar Modal</a>
+                                <a id="borrarmodal" href="#modaal_seguro" class="inline" style="display: none;">Borrar Modal</a>
                                 
                             </div>
 
                             
                         </div>
+
+                        
                     </section>
                     <!--  END News Section  -->
 
@@ -320,6 +349,43 @@
 
             <!--  END Modal  -->
 
+            <!--  Crear nueva carpeta Modal -->
+
+            <div id="modaal_afolder">
+                <div class="row no-margin content-section">
+                    <div class="text">
+                        <h2 class="margin-bottom-null title left">Asignar carpeta a usuario</h2>
+                        <div class="row padding-onlytop-md">
+                            <div class="col-md-12">
+                                <form id="contact-form" class="padding-md-topbottom-null">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input id="nombreCarpeta" class="form-field" name="name" id="name" type="text" placeholder="Nombre nueva carpeta">
+                                            <div id="msgerrorCreateFolder" style="color: red;" class="message">Es necesario seleccionar carpeta.</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input id="nombreCarpeta" class="form-field" name="name" id="name" type="text" placeholder="Nombre usuario">
+                                            <div id="msgerrorCreateFolder" style="color: red;" class="message">Es necesario seleccionar usuario.</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="submit-area padding-onlytop-sm">
+                                                <button type="button" id="createFolder" class="btn-alt active shadow" onclick="onClickCrearCarpeta()">Asignar Carpeta</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!--  END Modal  -->
+
 
 
             <!-- Eliminar Modal -->
@@ -335,7 +401,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                                 <p>Estás a punto de borrar una carpeta. ¿Estás seguro?</p>
-                                                                <button type="button" id="submit-contact" class="btn-alt active shadow" value="Cancelar">
+                                                                <button type="button" id="submit-contact" class="btn-alt active shadow" onclick="reload()">Cancelar</button>
                                                                 <button type="button" id="submit-contact" class="btn-alt active shadow" onclick="onClickBorrarCarpeta()">Borrar</button>
                                                     </div>
                                                 </div>
@@ -368,7 +434,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="submit-area padding-onlytop-sm">
-                                                    <button type="button" id="submit-contact" class="btn-alt active shadow">Aceptar</button>
+                                                    <button type="button" id="submit-contact" class="btn-alt active shadow" onclick="editarCarpeta()">Aceptar</button>
                                                     <div id="msg" class="message"></div>
                                                 </div>
                                             </div>
@@ -396,7 +462,6 @@
     <script src="assets/js/owl.carousel.min.js"></script>
     <script src="assets/js/isotope.min.js"></script>
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/smooth.scroll.min.js"></script>
     <script src="assets/js/jquery.appear.js"></script>

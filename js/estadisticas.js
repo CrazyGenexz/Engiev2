@@ -3,30 +3,33 @@ var tipoUsuario;
 var idUsuario;
 
 function inicio(){
-    var datosLocales = localStorage.getItem('datos');
-    var datosLocales1=JSON.parse(datosLocales);
-    tipoUsuario=datosLocales1.tipoUsuario;
-    idUsuario = datosLocales1.idUsuario;
-    nombre=datosLocales1.nombre;
-    getEstadisticas();
-    /*if ((tipoUsuario==1)){
-      alert('Permisos de administrador.')      
-      }else{
-        alert("No cuentas con los permisos necesarios.")
-        window.location.replace("index.html");
-      }*/
+  var datosLocales = localStorage.getItem('datos');
+  console.log(datosLocales1);
+  var datosLocales1=JSON.parse(datosLocales);
 
-    document.getElementById("nombreusuario").innerText=nombre;
-    checkRole(tipoUsuario);
+  tipoUsuario=datosLocales1.tipoUsuario;
+  idUsuario = datosLocales1.idUsuario;
+  nombre=datosLocales1.nombre;
 
-    //checkRole(tipoUsuario);
+  console.log(datosLocales1);
+
+  if(idUsuario != null ){
+    document.getElementById("acceso").style.display = 'none';
+  } else {
+    document.getElementById("cerrarsesion").style.display = 'none';
+  }
+
+  document.getElementById("nombreusuario").innerText=nombre;
+
+  checkRole(tipoUsuario);
 }
 
 
 function getEstadisticas(){
     var url = 'http://localhost/Engie/services/api/Estadisticas/bitacora.php';
       var datos = {
-        userid:idUsuario
+        userid:idUsuario,
+        tipouser:tipoUsuario
       }; 
       console.log(JSON.stringify(datos));
       fetch(url, {
@@ -58,27 +61,23 @@ function checkRole(tipoUsuario){
   switch(tipoUsuario){
       case 2: //Líder
           document.getElementById("menuUsuario").style.display='none';
-          document.getElementById("addFolder").style.display='none';
-          document.getElementById("table_id1").style.display='none';
-          getFolders();
+          getEstadisticas();
       break;
       case 3: //Corporativo
-          document.getElementById("menuUsuario").style.display='none';
-          document.getElementById("menuEstadisticas").style.display='none';
-          document.getElementById("addFolder").style.display='none';
-          document.getElementById("table_id1").style.display='none';
-          getFolders();
+          alert("No tienes permisos para ingresar a esta página.")
+          window.location.replace("index.html");
       break;
       case 4: //Cliente
-          document.getElementById("menuUsuario").style.display='none';
-          document.getElementById("menuEstadisticas").style.display='none';
-          document.getElementById("addFolder").style.display='none';
-          document.getElementById("table_id1").style.display='none';
-          getFolders();
+          alert("No tienes permisos para ingresar a esta página.")
+          window.location.replace("index.html");
       break;
       default: //Admin
-          document.getElementById("table_id2").style.display='none';
-          getFolders();
+          getEstadisticas();
       break;
   }
+}
+
+function cerrarSesion() {
+  localStorage.clear();
+  window.location.replace("index.html");
 }

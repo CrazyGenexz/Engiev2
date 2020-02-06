@@ -3,46 +3,28 @@ var tipoUsuario;
 var idUsuario;
 
 function inicio(){
-  console.log("tipo usuario: " + tipoUsuario);
     document.getElementById("msgerrorCreateFolder").style.display='none'
     document.getElementById("msgerror").style.display='none';
+
     var datosLocales = localStorage.getItem('datos');
     console.log(datosLocales1);
     var datosLocales1=JSON.parse(datosLocales);
+
     tipoUsuario=datosLocales1.tipoUsuario;
     idUsuario = datosLocales1.idUsuario;
     nombre=datosLocales1.nombre;
+
+    console.log(datosLocales1);
+
+    if(idUsuario != null ){
+      document.getElementById("acceso").style.display = 'none';
+    } else {
+      document.getElementById("cerrarsesion").style.display = 'none';
+    }
  
     document.getElementById("nombreusuario").innerText=nombre;
 
     checkRole(tipoUsuario);
-    getUsuarios();
-    
-}
-
-function getUsuarios(){
-  var url='http://localhost/Engie/services/api/Usuario/busca_usuario.php';
-  var datos = {  }; 
-      fetch(url, {
-      method: 'POST', // or 'PUT'
-      mode:"cors" // data can be `string` or {object}!
-      }).then((response)=>{
-      response.json().then((data) => {
-          console.log(data);
-          if(data.codigo==200){
-            console.log(data);
-              for (var i = 0; i <data.body.length; i++){
-                $("#table_usuarios").append('<tr id="'+data.body[i].UserId+'"><td>"'+data.body[i].UserName+'"</td><td>"'+data.body[i].UserName.TipoUser+'"</td><td><i class="icon ion-android-download green"></i><a href="#modaal_editar" onclick="getIdUser('+data.body[i].UserId+')" class="inline"> Cambiar contraseña</a></td><td><i class="icon ion-close red"></i><a onclick="getIdUser('+data.body[i].UserId+')" href="#modaal_seguro" class="inline"> Eliminar</a></td></tr>');
-              }
-          }
-          else{
-          alert("No existen usuarios aún");
-          }
-      });
-  }).catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', response));
-
-    
 }
 
 function checkRole(tipoUsuario){
@@ -87,8 +69,6 @@ function restriccionCrearCarpeta(){
   }
 }
 
-
-
 function consultarTodasAdmin(){
         var url="http://localhost/Engie/services/api/Carpetas/select_carpetas.php";
         var datos = { 
@@ -106,7 +86,7 @@ function consultarTodasAdmin(){
               console.log("si hay carpetas");
               if(tipoUsuario === 1 || tipoUsuario === 2) {
                 for (var i = 0; i <data.body.length; i++){
-                  $("#table_carpetas").append('<tr id="'+data.body[i].FolderId+'"><td>"'+data.body[i].Ruta+'"</td><td id="columna_editar"><i class="icon ion-edit blue"></i><button type="button" id="#modaal_editar" class="inline" onclick="getFolderId('+data.body[i].FolderId+')" > Editar</button></td><td id="columna_borrar"><i class="icon ion-close red"></i><a onclick="getIdUser('+data.body[i].UserId+')" href="#modaal_seguro" class="inline"> Eliminar</a></td></tr>');
+                  $("#table_carpetas").append('<tr id="'+data.body[i].FolderId+'"><td>"'+data.body[i].Ruta+'"</td><td id="columna_editar"><i class="icon ion-edit blue"></i><button type="button" id="#modaal_editar" class="inline" onclick="getFolderId('+data.body[i].FolderId+')" > Editar</button></td><td id="columna_borrar"><i class="icon ion-close red"></i><a onclick="goDelete('+data.body[i].FolderId+')" href="#modaal_seguro" class="inline"> Eliminar</a></td></tr>');
                 }
               }
               else {
@@ -121,76 +101,53 @@ function consultarTodasAdmin(){
         });
     })/*.catch(error => console.error('Error:', error))
         .then(response => console.log('Success:', response));*/
-  }
+}
   
-  /*var usuario = nombre;
-  var datos = { userid: 1 }; 
-    console.log(JSON.stringify(datos));
-    fetch(url, {
-    method: 'POST', // or 'PUT'
-    body: JSON.stringify(datos),
-    mode:"cors" // data can be `string` or {object}!
-    }).then((response)=>{
-       response.json().then((data) => {
-         console.log(data);
-         if(data.codigo==200){
-              if(data.codigo==200){
-                for (var i = 0; i <data.body.length; i++){
-                  $("#table_carpetas").append('<tr id="'+data.body[i].FolderId+'"><td>"'+data.body[i].Ruta+'"</td><td><i class="icon ion-android-download green"></i><a href="#modaal_editar" onclick="getIdUser('+data.body[i].FolderId+')" class="inline"> Cambiar contraseña</a></td><td><i class="icon ion-close red"></i><a onclick="getIdUser('+data.body[i].FolderId+')" href="#modaal_seguro" class="inline"> Eliminar</a></td></tr>');
-                }
-            }
-              
-             /* var len = data.length;
-              for (var i = 0; i < len; i++){
-                  $("#table_id").append('<tr id='+data.body.carpetaid+'><th  style="color:black; text-align: center; padding:20px;">'+data.body.nombreCarpeta+'</th><td><i class="icon ion-edit blue"></i><a href="#modaal_editar" class="inline"> Editar</a></td><td><i class="icon ion-close red"></i><a href="#modaal_seguro" class="inline"> Eliminar</a></td></tr>');
-              }*/
-         /*}
-         else{
-          alert("Este usuario no cuenta con carpetas.");
-        }
-      });
-  }).catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));*/
-
 
 function onClickCrearCarpeta(){
     restriccionCrearCarpeta();
-    var url="http://localhost/Engie/services/api/Carpetas/new_carpetas.php";
-    var nombreCarpetaV=document.getElementById("nombreCarpeta").value;
-    var datos = {
-        nombre: nombreCarpetaV,
-        userid: idUsuario
-    }
-    console.log(JSON.stringify(datos));
-      fetch(url, {
-      method: 'POST', // or 'PUT'
-      body: JSON.stringify(datos),
-      mode:"cors" // data can be `string` or {object}!
-      }).then((response)=>{
-         response.json().then((data) => {
-           console.log(data);
-           if(data.codigo==200){
-            alert("Carpeta creada exitosamente");
-            window.location.replace("carpeta.html");
-           }else{
-            alert("No se pudo crear la carpeta. Intenta de nuevo.");
-            window.location.replace("carpeta.html");
-           
-          }
-         });
-     }).catch(error => console.error('Error:', error))
-       .then(response => console.log('Success:', response));
+    if(bandera) {
+        var url="http://localhost/Engie/services/api/Carpetas/new_carpetas.php";
+        var nombreCarpetaV=document.getElementById("nombreCarpeta").value;
+        var datos = {
+            nombre: nombreCarpetaV,
+            userid: idUsuario,
+            tipouser: tipoUsuario
+        }
+        console.log(JSON.stringify(datos));
+          fetch(url, {
+          method: 'POST', // or 'PUT'
+          body: JSON.stringify(datos),
+          mode:"cors" // data can be `string` or {object}!
+          }).then((response)=>{
+            response.json().then((data) => {
+              console.log(data);
+              if(data.codigo==200){
+                alert("Carpeta creada exitosamente");
+                window.location.replace("carpeta.html");
+              }else{
+                alert("No se pudo crear la carpeta. Intenta de nuevo.");
+                window.location.replace("carpeta.html");
+              
+              }
+            });
+        }).catch(error => console.error('Error:', error))
+          .then(response => console.log('Success:', response));
+      } else {
+        document.getElementById("msgerrorCreateFolder").style.display='inline'
+      }
 
 
 }
 
-function onClickEditarCarpeta(nombreActual){
+function editarCarpeta(nombreActual){
     var url="http://localhost/Engie/services/api/Carpetas/modify_carpetas.php";
     var nuevoNombreCarpetaV=document.getElementById("nuevoNombreCarpeta").value;
     var datos = {
-        nombre: nombreActual,
-        userid: idUsuario,
-        nombreCarpeta: nuevoNombreCarpetaV
+      folderid: FolderId,
+      nuevonombre: nuevoNombreCarpetaV,
+      tipouser: tipoUsuario,
+      useridupdate: idUsuario
     }
     console.log(JSON.stringify(datos));
       fetch(url, {
@@ -203,11 +160,14 @@ function onClickEditarCarpeta(nombreActual){
            if(data.codigo==200){
              console.log(data.body);
              alert("Carpeta actualizada exitosamente!");
+             window.location.replace("carpeta.html");
            }if(data.codigo==400){
              alert("No se pudo actualizar el nombre de la carpeta. Intenta de nuevo.");
+             window.location.replace("carpeta.html");
           }
            else{
              alert("Intentalo de nuevo");
+             window.location.replace("carpeta.html");
            }
          });
      }).catch(error => console.error('Error:', error))
@@ -215,9 +175,11 @@ function onClickEditarCarpeta(nombreActual){
 }
 
 function onClickBorrarCarpeta(idCarpetaS){
-    var url="aquí consumo la liga para crear la carpeta";
+    var url="http://localhost/Engie/services/api/Carpetas/delete_carpetas.php";
     var datos = {
-        idCarpeta: idCarpetaS
+        folderid: FolderId,
+        tipouser: tipoUsuario,
+        useridupdate: idUsuario
     }
     console.log(JSON.stringify(datos));
       fetch(url, {
@@ -229,12 +191,15 @@ function onClickBorrarCarpeta(idCarpetaS){
            console.log(data);
            if(data.codigo==200){
              console.log(data.body);
-             alert("Carpeta actualizada exitosamente!");
+             alert("Carpeta borrada exitosamente!");
+             window.location.replace("carpeta.html");
            }if(data.codigo==400){
-             alert("No se pudo actualizar el nombre de la carpeta. Intenta de nuevo.");
+             alert("No se pudo borrar la carpeta. Intenta de nuevo.");
+             window.location.replace("carpeta.html");
           }
            else{
              alert("Intentalo de nuevo");
+             window.location.replace("carpeta.html");
            }
          });
      }).catch(error => console.error('Error:', error))
@@ -242,9 +207,23 @@ function onClickBorrarCarpeta(idCarpetaS){
 }
 
 function getFolderId(variable){
-  var bd = $('<a id="raisemodaledit" href="#modaal_editar" class="inline">cc</a>')
-  bd.appendTo(document.body);
-  document.getElementById("raisemodaledit").click();
+  document.getElementById("editarmodal").click();
   FolderId=variable;
-  console.log(FolderId);
+}
+
+
+function reload(){
+  window.location.replace("carpeta.html");
+}
+
+function goDelete(variable){
+  FolderId = variable;
+  document.getElementById("borrarmodal").click();
+}
+
+
+
+function cerrarSesion() {
+    localStorage.clear();
+    window.location.replace("index.html");
 }

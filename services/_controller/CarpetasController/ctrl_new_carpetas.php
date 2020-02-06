@@ -29,16 +29,18 @@
                 $nombre=$data['nombre'];
                 $userid=$data['userid'];
                 $params=array($nombre,$userid);
-                $queryBusqueda1 = "SELECT Ruta, UserId FROM dbo.Folders Where Ruta = (?) AND UserId = (?);";
-                $cmd1 = sqlsrv_query($conn, $queryBusqueda1, $params);
+
+                //Comprobacion de que no hay una carpeta con ese nombre
+                $queryBusqueda1 = "SELECT Ruta, UserId FROM dbo.Folders Where Ruta = '" . $nombre . "' AND UserId = '" . $userid . "' AND STATUS=1;";
+                $cmd1 = sqlsrv_query($conn, $queryBusqueda1);
                 if ($cmd1) { 
                     $rows = sqlsrv_has_rows($cmd1);
                     if( $rows === true){ 
                         $response = array('codigo' => 201, 'msg'=>'Error: Esa Carpeta ya se encuentra, elige otro nombre');
                         return json_encode($response);
                     }else{
-                        $queryBusqueda = "INSERT INTO dbo.Folders (Ruta, UserId, CreatedDate) VALUES ((?), (?), '". $fechaActual . "');";
-                        $cmd = sqlsrv_query($conn, $queryBusqueda, $params);
+                        $queryBusqueda = "INSERT INTO dbo.Folders (Ruta, UserId, CreatedDate, UserIdUpdate, Status) VALUES ('". $nombre . "', '" . $userid . "', '". $fechaActual . "', '" . $userid . "',1);";
+                        $cmd = sqlsrv_query($conn, $queryBusqueda);
                         if ($cmd === false) { 
 
                             $response = array('codigo' => 400, 'msg'=>'No se pudo insertar la Carpeta');
